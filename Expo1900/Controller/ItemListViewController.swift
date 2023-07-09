@@ -63,7 +63,9 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let item = items[indexPath.row]
+        guard let item = items[safe: indexPath.row] else {
+            return UITableViewCell()
+        }
 
         cell.setModel(item)
         
@@ -92,5 +94,11 @@ extension ItemListViewController: AlertProtocol {
         
         alert.addAction(confirmAction)
         present(alert, animated: true)
+    }
+}
+
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
