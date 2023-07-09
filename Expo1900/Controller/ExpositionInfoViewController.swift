@@ -28,20 +28,15 @@ final class ExpositionInfoViewController: UIViewController {
         decodingExpositionInfo()
         updateMainViewLabels()
         self.navigationController?.navigationBar.topItem?.title = "메인"
+        navigationController?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        appDelegate?.isRotationControl = false
         updateScroll()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        appDelegate?.isRotationControl = true
-    }
-
     private func updateScroll() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
@@ -107,5 +102,15 @@ extension ExpositionInfoViewController: AlertProtocol {
         
         alert.addAction(confirmAction)
         present(alert, animated: true)
+    }
+}
+
+extension ExpositionInfoViewController: UINavigationControllerDelegate {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
+        return navigationController.topViewController?.supportedInterfaceOrientations ?? .all
     }
 }

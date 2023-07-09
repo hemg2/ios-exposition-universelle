@@ -20,6 +20,7 @@ final class ItemListViewController: UIViewController {
         alertDelegate = self
         showNavigationBar()
         loadItems()
+        
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -64,9 +65,7 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let item = items[indexPath.row]
 
-        cell.itemImageView.image = UIImage(named: item.imageName)
-        cell.titleLabel.text = item.name
-        cell.shortDescriptionLabel.text = item.shortDescription
+        cell.setModel(item)
         
         return cell
     }

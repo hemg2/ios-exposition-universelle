@@ -9,16 +9,13 @@ import UIKit
 
 class ItemListTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var itemImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var shortDescriptionLabel: UILabel!
+    @IBOutlet private weak var itemImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var shortDescriptionLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func setModel(_ items: Item) {
+        itemImageView.image = UIImage(named: items.imageName)
+        titleLabel.text = items.name
+        shortDescriptionLabel.text = items.shortDescription
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
 }
