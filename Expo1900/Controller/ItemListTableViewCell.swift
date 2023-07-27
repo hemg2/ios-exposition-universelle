@@ -13,6 +13,12 @@ class ItemListTableViewCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var shortDescriptionLabel: UILabel!
     
+    override func prepareForReuse() {
+        itemImageView.image = nil
+        titleLabel.text = nil
+        shortDescriptionLabel.text = nil
+    }
+    
     func setModel(_ items: Item) {
         itemImageView.image = UIImage(named: items.imageName)
         titleLabel.text = items.name
