@@ -67,8 +67,8 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
+        cell.prepareForReuse()
         cell.setModel(item)
-        
         return cell
     }
     
